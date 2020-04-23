@@ -1,0 +1,1333 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.1">
+    
+    
+      
+        <title>Object Detection Dataset - Preimutils</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a676eddb.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.b302131d.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546e7a">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prepare-your-dataset" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Preimutils" class="md-header-nav__button md-logo" aria-label="Preimutils">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Preimutils
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Object Detection Dataset
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." class="md-tabs__link md-tabs__link--active">
+        Official English Documentation for PreImutils!
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Preimutils" class="md-nav__button md-logo" aria-label="Preimutils">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    Preimutils
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Official English Documentation for PreImutils!" class="md-nav__link">
+      Official English Documentation for PreImutils!
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Object Detection Dataset
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Object Detection Dataset" class="md-nav__link md-nav__link--active">
+      Object Detection Dataset
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-your-dataset" class="md-nav__link">
+    Prepare Your dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-dataset" class="md-nav__link">
+    Download dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labeling" class="md-nav__link">
+    Labeling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-to-yolo" class="md-nav__link">
+    Convert to Yolo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rename-image-path-in-annotations-file" class="md-nav__link">
+    Rename image path in Annotations file
+  </a>
+  
+    <nav class="md-nav" aria-label="Rename image path in Annotations file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-for-valid-labels" class="md-nav__link">
+    Checking for valid labels
+  </a>
+  
+    <nav class="md-nav" aria-label="Checking for valid labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#label_checker" class="md-nav__link">
+    label_checker
+  </a>
+  
+    <nav class="md-nav" aria-label="label_checker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_1" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_1" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-label" class="md-nav__link">
+    Replace label
+  </a>
+  
+    <nav class="md-nav" aria-label="Replace label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_2" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_2" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crop-from-point" class="md-nav__link">
+    Crop from point
+  </a>
+  
+    <nav class="md-nav" aria-label="Crop from point">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_3" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_3" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-with-label" class="md-nav__link">
+    Separate with label
+  </a>
+  
+    <nav class="md-nav" aria-label="Separate with label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_4" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_4" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shuffle-dataset-images-and-annotations" class="md-nav__link">
+    Shuffle dataset images and annotations
+  </a>
+  
+    <nav class="md-nav" aria-label="Shuffle dataset images and annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_5" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-shell" class="md-nav__link">
+    How to use shell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-augmentation" class="md-nav__link">
+    Image augmentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Image augmentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_6" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_5" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-validate-separator" class="md-nav__link">
+    Train validate separator
+  </a>
+  
+    <nav class="md-nav" aria-label="Train validate separator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_7" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_6" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xml-to-csv-converting" class="md-nav__link">
+    XML to csv converting
+  </a>
+  
+    <nav class="md-nav" aria-label="XML to csv converting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_7" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistics-of-your-dataset-labels" class="md-nav__link">
+    Statistics of your Dataset labels
+  </a>
+  
+    <nav class="md-nav" aria-label="Statistics of your Dataset labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_8" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../segmentation/" title="Segmentation Dataset" class="md-nav__link">
+      Segmentation Dataset
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../voc/" title="VOC dataset" class="md-nav__link">
+      VOC dataset
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../coco/" title="COCO dataset" class="md-nav__link">
+      COCO dataset
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-your-dataset" class="md-nav__link">
+    Prepare Your dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-dataset" class="md-nav__link">
+    Download dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labeling" class="md-nav__link">
+    Labeling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-to-yolo" class="md-nav__link">
+    Convert to Yolo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rename-image-path-in-annotations-file" class="md-nav__link">
+    Rename image path in Annotations file
+  </a>
+  
+    <nav class="md-nav" aria-label="Rename image path in Annotations file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-for-valid-labels" class="md-nav__link">
+    Checking for valid labels
+  </a>
+  
+    <nav class="md-nav" aria-label="Checking for valid labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#label_checker" class="md-nav__link">
+    label_checker
+  </a>
+  
+    <nav class="md-nav" aria-label="label_checker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_1" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_1" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-label" class="md-nav__link">
+    Replace label
+  </a>
+  
+    <nav class="md-nav" aria-label="Replace label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_2" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_2" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crop-from-point" class="md-nav__link">
+    Crop from point
+  </a>
+  
+    <nav class="md-nav" aria-label="Crop from point">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_3" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_3" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-with-label" class="md-nav__link">
+    Separate with label
+  </a>
+  
+    <nav class="md-nav" aria-label="Separate with label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_4" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_4" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shuffle-dataset-images-and-annotations" class="md-nav__link">
+    Shuffle dataset images and annotations
+  </a>
+  
+    <nav class="md-nav" aria-label="Shuffle dataset images and annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_5" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-shell" class="md-nav__link">
+    How to use shell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#image-augmentation" class="md-nav__link">
+    Image augmentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Image augmentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_6" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_5" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-validate-separator" class="md-nav__link">
+    Train validate separator
+  </a>
+  
+    <nav class="md-nav" aria-label="Train validate separator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_7" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_6" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xml-to-csv-converting" class="md-nav__link">
+    XML to csv converting
+  </a>
+  
+    <nav class="md-nav" aria-label="XML to csv converting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-terminal_7" class="md-nav__link">
+    How to use terminal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistics-of-your-dataset-labels" class="md-nav__link">
+    Statistics of your Dataset labels
+  </a>
+  
+    <nav class="md-nav" aria-label="Statistics of your Dataset labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-in-code_8" class="md-nav__link">
+    How to use in code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Object Detection Dataset</h1>
+                
+                <p><img alt="Bounding Box" src="../imgs/object_detection.jpg" /></p>
+<h2 id="prepare-your-dataset">Prepare Your dataset<a class="headerlink" href="#prepare-your-dataset" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>When use PreImutils object detection please put your data in this pattern</strong></p>
+</div>
+<div class="codehilite"><pre><span></span><code>+dataset
+    -label.json
+    +images
+    +annotations
+</code></pre></div>
+
+
+<p><strong>sample of label.json file</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;object1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;object2&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;object3&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;object4&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;object5&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;6&quot;</span><span class="p">:</span> <span class="s2">&quot;object6&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;7&quot;</span><span class="p">:</span> <span class="s2">&quot;object7&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;8&quot;</span><span class="p">:</span> <span class="s2">&quot;object8&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;9&quot;</span><span class="p">:</span> <span class="s2">&quot;object9&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;10&quot;</span><span class="p">:</span> <span class="s2">&quot;object10&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;11&quot;</span><span class="p">:</span> <span class="s2">&quot;object11&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;12&quot;</span><span class="p">:</span> <span class="s2">&quot;object12&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;13&quot;</span><span class="p">:</span> <span class="s2">&quot;object13&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h2 id="download-dataset">Download dataset<a class="headerlink" href="#download-dataset" title="Permanent link">&para;</a></h2>
+<p>For downloading your dataset I suggest you to use  <a href="https://github.com/hardikvasa/google-images-download">google_images_download</a>  package easy to use 
+<code>pip install google_images_download</code></p>
+<h2 id="labeling">Labeling<a class="headerlink" href="#labeling" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>For labeling (bounding box) I suggest you to use  <a href="https://github.com/tzutalin/labelImg">labelImg</a> and suggest to label in PASCAL_VOC mode because you can easily work on in and convert to coco and YOLO.</strong></p>
+</blockquote>
+<h2 id="convert-to-yolo">Convert to Yolo<a class="headerlink" href="#convert-to-yolo" title="Permanent link">&para;</a></h2>
+<p><strong>For converting to YOLO use <a href="https://github.com/ssaru/convert2Yolo">convert2Yolo</a></strong></p>
+<h2 id="rename-image-path-in-annotations-file">Rename image path in Annotations file<a class="headerlink" href="#rename-image-path-in-annotations-file" title="Permanent link">&para;</a></h2>
+<p>When You move your dataset files from some place to another you need to change image path in the .xml file
+this function find the related image file in your image path and replace the annotation path</p>
+<p><strong>after moving</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;annotation&gt;</span>
+    <span class="nt">&lt;folder&gt;</span>voc2012<span class="nt">&lt;/folder&gt;</span>
+    <span class="nt">&lt;filename&gt;</span>000001<span class="nt">&lt;/filename&gt;</span>
+    <span class="nt">&lt;path&gt;</span>~/old_path/000001.jpg<span class="nt">&lt;/path&gt;</span>
+    <span class="nt">&lt;source&gt;</span>
+        <span class="nt">&lt;database&gt;</span>Unknown<span class="nt">&lt;/database&gt;</span>
+    <span class="nt">&lt;/source&gt;</span>
+    <span class="nt">&lt;size&gt;</span>
+        <span class="nt">&lt;width&gt;</span>353<span class="nt">&lt;/width&gt;</span>
+        <span class="nt">&lt;height&gt;</span>500<span class="nt">&lt;/height&gt;</span>
+        <span class="nt">&lt;depth&gt;</span>3<span class="nt">&lt;/depth&gt;</span>
+    <span class="nt">&lt;/size&gt;</span>
+    <span class="nt">&lt;segmented&gt;</span>0<span class="nt">&lt;/segmented&gt;</span>
+    <span class="nt">&lt;object&gt;</span>
+        <span class="nt">&lt;name&gt;</span>sample_object<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;pose&gt;</span>Unspecified<span class="nt">&lt;/pose&gt;</span>
+        <span class="nt">&lt;truncated&gt;</span>0<span class="nt">&lt;/truncated&gt;</span>
+        <span class="nt">&lt;difficult&gt;</span>0<span class="nt">&lt;/difficult&gt;</span>
+        <span class="nt">&lt;bndbox&gt;</span>
+            <span class="nt">&lt;xmin&gt;</span>129<span class="nt">&lt;/xmin&gt;</span>
+            <span class="nt">&lt;ymin&gt;</span>31<span class="nt">&lt;/ymin&gt;</span>
+            <span class="nt">&lt;xmax&gt;</span>298<span class="nt">&lt;/xmax&gt;</span>
+            <span class="nt">&lt;ymax&gt;</span>227<span class="nt">&lt;/ymax&gt;</span>
+        <span class="nt">&lt;/bndbox&gt;</span>
+    <span class="nt">&lt;/object&gt;</span>
+<span class="nt">&lt;/annotation&gt;</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-in-code">How to use in code<a class="headerlink" href="#how-to-use-in-code" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">xml_address_changer</span>
+<span class="n">xml_address_changer</span><span class="p">(</span><span class="n">xmls_dir</span><span class="p">,</span> <span class="n">images_dir</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-terminal">How to use terminal<a class="headerlink" href="#how-to-use-terminal" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>xml_address_changer
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --images_dir <span class="nv">$IMAGES_DIR</span>
+</code></pre></div>
+
+
+<h2 id="checking-for-valid-labels">Checking for valid labels<a class="headerlink" href="#checking-for-valid-labels" title="Permanent link">&para;</a></h2>
+<h3 id="label_checker">label_checker<a class="headerlink" href="#label_checker" title="Permanent link">&para;</a></h3>
+<p>Imaging your labeling team label some wrong label on your picture you can find with this function and replace with the correct one with <a href="#replace-label">Replace label</a></p>
+<h4 id="how-to-use-in-code_1">How to use in code<a class="headerlink" href="#how-to-use-in-code_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">label_checker</span>
+<span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">LabelHandler</span>
+
+
+<span class="n">label</span> <span class="o">=</span> <span class="n">LabelHandler</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
+<span class="n">classes_array</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">json_label_array</span><span class="p">()</span>
+<span class="c1"># or you can Prepare it manually</span>
+<span class="c1"># if there were problem print the file and wrong label for and write the statistic of each label in another json file</span>
+<span class="n">label_checker</span><span class="p">(</span><span class="n">xmls_dir</span><span class="p">,</span><span class="n">classes_array</span><span class="p">)</span>
+<span class="n">replace_label</span><span class="p">(</span><span class="n">xmls_dir</span><span class="p">,</span><span class="n">from_label</span><span class="p">,</span><span class="n">dst_label</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h4 id="how-to-use-terminal_1">How to use terminal<a class="headerlink" href="#how-to-use-terminal_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>label_checker
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span>  --images_dir <span class="nv">$IMAGES_DIR</span>
+</code></pre></div>
+
+
+<h3 id="replace-label">Replace label<a class="headerlink" href="#replace-label" title="Permanent link">&para;</a></h3>
+<p>Imaging your labeling team label some wrong label on your picture you can replace it with the currect one.
+for instance: instead of object some of label write object.</p>
+<h4 id="how-to-use-in-code_2">How to use in code<a class="headerlink" href="#how-to-use-in-code_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">replace_label</span><span class="p">,</span><span class="n">label_checker</span>
+
+<span class="n">label</span> <span class="o">=</span> <span class="n">LabelHandler</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
+<span class="n">classes_array</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">json_label_array</span><span class="p">()</span>
+<span class="c1"># or you can Prepare it manually</span>
+<span class="c1"># if there were problem print the file and wrong label for and write the statistic of each label in another json file</span>
+<span class="n">label_checker</span><span class="p">(</span><span class="n">xmls_dir</span><span class="p">,</span><span class="n">classes_array</span><span class="p">)</span>
+<span class="n">replace_label</span><span class="p">(</span><span class="n">xmls_dir</span><span class="p">,</span><span class="n">from_label</span><span class="p">,</span><span class="n">dst_label</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h4 id="how-to-use-terminal_2">How to use terminal<a class="headerlink" href="#how-to-use-terminal_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">DST_LABEL</span><span class="o">=</span>YOUR_CORRECT_LABEL
+<span class="nv">SOURCE_LABEL</span><span class="o">=</span>YOUR_WRONG_LABEL
+<span class="nv">FUNCTION</span><span class="o">=</span>replace_label
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span>  --xmls_dir <span class="nv">$XMLS_DIR</span> --label <span class="nv">$SOURCE_LABEL</span> --dst_label <span class="nv">$DST_LABEL</span>
+</code></pre></div>
+
+
+<h2 id="crop-from-point">Crop from point<a class="headerlink" href="#crop-from-point" title="Permanent link">&para;</a></h2>
+<p>Some time you label your images but you need the pure images for instance for training haarcascade method with OpenCV or training simple convolutional neural network
+this function crop images with their bbox and separating to their related object name.</p>
+<h3 id="how-to-use-in-code_3">How to use in code<a class="headerlink" href="#how-to-use-in-code_3" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">cut_with_object_names</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+  <span class="n">cut_with_object_names</span><span class="p">(</span><span class="n">images_dir</span><span class="p">,</span> <span class="n">xmls_dir</span><span class="p">,</span><span class="n">dst_save</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-terminal_3">How to use terminal<a class="headerlink" href="#how-to-use-terminal_3" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">DST_SAVE</span><span class="o">=</span>~/YOUR_DESTINATION_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>cut_with_object_names
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --dst_save <span class="nv">$DST_SAVE</span> --images_dir <span class="nv">$IMAGES_DIR</span>
+</code></pre></div>
+
+
+<h2 id="separate-with-label">Separate with label<a class="headerlink" href="#separate-with-label" title="Permanent link">&para;</a></h2>
+<p>Separate images and their related annotations files on their object name file
+after working on your separated dataset you can gather all of them together with <code>gather_together(label_array, DATASET_PATH)</code></p>
+<p><strong>after run</strong></p>
+<div class="codehilite"><pre><span></span><code>+dataset
+    -label.json
+    +images
+    +annotations
+    +object
+      +images
+      +annotations
+    +object2
+      +images
+      +annotations
+    +objectN
+      +images
+      +annotations
+</code></pre></div>
+
+
+<h3 id="how-to-use-in-code_4">How to use in code<a class="headerlink" href="#how-to-use-in-code_4" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">separate_with_label</span><span class="p">,</span><span class="n">gather_together</span>
+<span class="n">separate_with_label</span><span class="p">(</span><span class="n">XML_PATH</span><span class="p">,</span> <span class="n">IMAGE_PATH</span><span class="p">,</span> <span class="n">label_array</span><span class="p">)</span>
+<span class="c1"># after working on your separated dataset you can gather all of them together</span>
+<span class="n">gather_together</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span> <span class="n">DATASET_PATH</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-terminal_4">How to use terminal<a class="headerlink" href="#how-to-use-terminal_4" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>separate_with_label
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --images_dir <span class="nv">$IMAGES_DIR</span>
+</code></pre></div>
+
+
+<h2 id="shuffle-dataset-images-and-annotations">Shuffle dataset images and annotations<a class="headerlink" href="#shuffle-dataset-images-and-annotations" title="Permanent link">&para;</a></h2>
+<p>One of the easiest but <strong>the most important</strong> point for pretraining, if you don't shuffle your images and their annotation your neural network won't get accurate result.</p>
+<p>This function shuffling images and their related annotations and save in the destination directory</p>
+<h3 id="how-to-use-in-code_5">How to use in code<a class="headerlink" href="#how-to-use-in-code_5" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="k">as</span> <span class="n">shuffle_img_xml</span>
+<span class="n">shuffle_img_xml</span><span class="p">(</span><span class="n">XMLS_DIR</span><span class="p">,</span> <span class="n">IMAGES_DIR</span><span class="p">,</span> <span class="n">DST_PATH</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-shell">How to use shell<a class="headerlink" href="#how-to-use-shell" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">DST_SAVE</span><span class="o">=</span>~/YOUR_DESTINATION_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>shuffle_img_xml
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --images_dir <span class="nv">$IMAGES_DIR</span> --dst_save <span class="nv">$DST_SAVE</span>
+</code></pre></div>
+
+
+<h2 id="image-augmentation">Image augmentation<a class="headerlink" href="#image-augmentation" title="Permanent link">&para;</a></h2>
+<p>One of the most important item for machine learning, CNN or other neural networks is augmenting your dataset in different situations.</p>
+<p>I've used all the augmentations method and highly recommend you to use this package <a href="" title="https://github.com/albumentations-team/albumentations">albumentations</a>.</p>
+<p>Write a good wrapper for this package with the best filter of this package that calculate the number of each object and then augment all of them in amount that you want.</p>
+<h3 id="how-to-use-in-code_6">How to use in code<a class="headerlink" href="#how-to-use-in-code_6" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">AMRLImageAug</span>
+
+<span class="n">img_aug</span> <span class="o">=</span> <span class="n">AMRLImageAug</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="n">xmls_dir</span><span class="p">,</span> <span class="n">images_dir</span><span class="p">)</span>
+<span class="n">img_aug</span><span class="o">.</span><span class="n">auto_augmentation</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>If you want to resize your images set resized param <code>True</code> and pass the <code>width</code> and <code>height</code> in parameters.</p>
+<p><strong>Point</strong>
+As you know, if you use resize with other functions such as <code>cv2.resized()</code> your bounding box will be disarrange.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">AMRLImageAug</span>
+
+<span class="n">img_aug</span> <span class="o">=</span> <span class="n">AMRLImageAug</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="n">xmls_dir</span><span class="p">,</span> <span class="n">images_dir</span><span class="p">)</span>
+<span class="n">img_aug</span><span class="o">.</span><span class="n">auto_augmentation</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">resized</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-terminal_5">How to use terminal<a class="headerlink" href="#how-to-use-terminal_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Without resize</li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>auto_augmentation
+<span class="nv">QUANTITY</span><span class="o">=</span><span class="m">1000</span> <span class="c1"># the amount of each object to create</span>
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --images_dir <span class="nv">$IMAGES_DIR</span> --quantity <span class="nv">$QUANTITY</span>
+</code></pre></div>
+
+
+<ol>
+<li>Resize</li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">FUNCTION</span><span class="o">=</span>auto_augmentation
+<span class="nv">QUANTITY</span><span class="o">=</span><span class="m">1000</span> <span class="c1"># the amount of each object to create</span>
+<span class="nv">RESIZE</span><span class="o">=</span>True <span class="c1"># If you want to resize You should set WIDTH and WIDTH param</span>
+<span class="nv">WIDTH</span><span class="o">=</span><span class="m">300</span>
+<span class="nv">HEIGHT</span><span class="o">=</span><span class="m">300</span>
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --images_dir <span class="nv">$IMAGES_DIR</span> --quantity <span class="nv">$QUANTITY</span> --resize <span class="nv">$RESIZE</span> --width <span class="nv">$WIDTH</span> --height <span class="nv">$HEIGHT</span>
+</code></pre></div>
+
+
+<h2 id="train-validate-separator">Train validate separator<a class="headerlink" href="#train-validate-separator" title="Permanent link">&para;</a></h2>
+<p>We provide tool for separating your images for train and validation dataset with their related annotations.</p>
+<h3 id="how-to-use-in-code_7">How to use in code<a class="headerlink" href="#how-to-use-in-code_7" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">separate_test_val</span>
+<span class="n">separate_test_val</span><span class="p">(</span><span class="n">IMAGES_DIR</span><span class="p">,</span><span class="n">XMLS_DIR</span><span class="p">,</span><span class="n">DST_VALIDATION_PATH</span><span class="p">,</span><span class="n">DST_TRAIN_PATH</span><span class="p">,</span><span class="n">validation_percentage</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-terminal_6">How to use terminal<a class="headerlink" href="#how-to-use-terminal_6" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">IMAGES_DIR</span><span class="o">=</span>~/YOUR_IMAGES_DIR/
+<span class="nv">DATASET_PATH</span><span class="o">=</span>~/DATASET_PATH/
+<span class="nv">VALIDATION_PERSENT</span><span class="o">=</span><span class="m">0</span>.3
+<span class="nv">FUNCTION</span><span class="o">=</span>separate_test_val
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --images_dir <span class="nv">$IMAGES_DIR</span> --dataset_dir <span class="nv">$DATASET_PATH</span> --validation_persent <span class="nv">$VALIDATION_PERSENT</span>
+</code></pre></div>
+
+
+<h2 id="xml-to-csv-converting">XML to csv converting<a class="headerlink" href="#xml-to-csv-converting" title="Permanent link">&para;</a></h2>
+<p>This function convert pascal-voc format to csv</p>
+<h3 id="how-to-use-terminal_7">How to use terminal<a class="headerlink" href="#how-to-use-terminal_7" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">JSON_PATH</span><span class="o">=</span>~/YOUR_JSON_PATH/label.json
+<span class="nv">XMLS_DIR</span><span class="o">=</span>~/YOUR_ANNOTATION_DIR/
+<span class="nv">DST_SAVE</span><span class="o">=</span>~/YOUR_DESTINATION_DIR/
+<span class="nv">VALIDATION_PERSENT</span><span class="o">=</span><span class="m">0</span>.3
+<span class="nv">FUNCTION</span><span class="o">=</span>xml_to_csv
+
+preimutils --function <span class="nv">$FUNCTION</span> --label_json_path <span class="nv">$JSON_PATH</span> --xmls_dir <span class="nv">$XMLS_DIR</span> --dst_save <span class="nv">$DST_SAVE</span>
+</code></pre></div>
+
+
+<h2 id="statistics-of-your-dataset-labels">Statistics of your Dataset labels<a class="headerlink" href="#statistics-of-your-dataset-labels" title="Permanent link">&para;</a></h2>
+<p>Get statistics of dataset with their labels with their xmls and images files path
+return</p>
+<div class="codehilite"><pre><span></span><code>        <span class="err">dict</span><span class="p">{</span>   <span class="nt">&quot;label1&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;xmls_paths&quot;</span><span class="p">:[],</span>
+            <span class="nt">&quot;images_paths&quot;</span><span class="p">:[],</span>
+                    <span class="p">},</span>
+        <span class="nt">&quot;labelN&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;xmls_paths&quot;</span><span class="p">:[],</span>
+            <span class="nt">&quot;images_paths&quot;</span><span class="p">:[],</span>
+                    <span class="p">},</span>
+        <span class="p">}</span>
+</code></pre></div>
+
+
+<h3 id="how-to-use-in-code_8">How to use in code<a class="headerlink" href="#how-to-use-in-code_8" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">preimutils.object_detection</span> <span class="kn">import</span> <span class="n">export_path_count_for_each_label</span>
+<span class="n">export_path_count_for_each_label</span><span class="p">(</span><span class="n">xmls_dir</span><span class="p">,</span> <span class="n">images_dir</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../installation/" title="Installation" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Installation
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../segmentation/" title="Segmentation Dataset" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Segmentation Dataset
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c51dfa35.min.js"></script>
+      <script src="../assets/javascripts/bundle.eaaa3931.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ["instant", "tabs"],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
